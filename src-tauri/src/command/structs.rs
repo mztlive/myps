@@ -1,7 +1,4 @@
-use std::{
-    collections::HashMap,
-    sync::{Mutex, MutexGuard},
-};
+use std::{collections::HashMap, sync::MutexGuard};
 
 use serde::{Deserialize, Serialize};
 

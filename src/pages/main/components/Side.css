@@ -1,0 +1,4 @@
+.side-menu::-webkit-scrollbar {
+    display: none;
+    /* Chrome Safari */
+}

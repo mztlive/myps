@@ -7,9 +7,8 @@ mod command;
 mod error;
 mod rsa;
 
-use std::thread;
-
 use command::{db, init, lock, record, static_var::STATIC_PASSWORD_LOCK};
+use std::thread;
 
 fn main() {
     // 定时刷新密码锁

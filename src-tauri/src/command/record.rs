@@ -33,6 +33,7 @@ impl RecordCommands {
             record.url, record.account, record.title, record.password, record.remark
         );
 
+        println!("{}", ciphertext);
         let full_pub_key_fname = [&self.cfg.pem_path, "/", PUB_KEY_FNAME].concat();
         let ciphertext = encrypt(full_pub_key_fname.as_str(), &ciphertext)?;
         Ok(ciphertext)
@@ -46,14 +47,15 @@ impl RecordCommands {
             return Err(BusinessError::NoSetPassword);
         }
 
-        println!("{}", full_priv_key_fname);
-
         let plaintext = decrypt(full_priv_key_fname.as_str(), &ciphertext, &self.password)?;
+        println!("{}", plaintext);
         let parts = plaintext.split(" ").collect::<Vec<&str>>();
 
         if parts.len() != 5 {
             return Err(BusinessError::RsaError("解密失败".to_string()));
         }
+
+        println!("parts: {:?}", parts);
 
         let record = Record {
             title: parts[2].to_string(),

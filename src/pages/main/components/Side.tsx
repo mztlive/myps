@@ -1,5 +1,6 @@
 import { Component, createSignal, For } from "solid-js";
 import { SideItem, SideProp } from "../../../define/types";
+import "./Side.css";
 
 const Side: Component<SideProp> = (props: SideProp) => {
 
@@ -20,7 +21,7 @@ const Side: Component<SideProp> = (props: SideProp) => {
     }
 
     return (
-        <div id="side" class="shadow-2xl flex max-h-96 w-45 flex-col m-2.5 p-2.5 rounded">
+        <div id="side" class="shadow-2xl flex  w-45 flex-col m-2.5 p-2.5 rounded">
             <div class="flex flex-row justify-center items-center">
                 <input type="text" placeholder="输入检索" class="input input-bordered w-full max-w-xs h-8 mr-2" />
                 <button class="btn btn-sm btn-circle" onclick={() => { props.onAddIconClick() }}>
@@ -28,7 +29,7 @@ const Side: Component<SideProp> = (props: SideProp) => {
                 </button>
             </div>
             <br />
-            <div class="h-full overflow-scroll">
+            <div class="side-menu h-full overflow-scroll">
                 <ul class="menu bg-base-100">
                     <For each={props.menus} fallback={<div>点右上角添加</div>}>
                         {(item) => <li classList={{ bordered: item.isSelected() }} onclick={() => { onSelectMenu(item) }}><a>{item.title()}</a></li>}

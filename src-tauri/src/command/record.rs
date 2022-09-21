@@ -28,12 +28,12 @@ impl RecordCommands {
 
     /// 加密record
     fn record2str(&self, record: &Record) -> Result<String, BusinessError> {
-        let ciphertext = format!(
+        let mut ciphertext = format!(
             "{} {} {} {} {}\n",
             record.url, record.account, record.title, record.password, record.remark
         );
 
-        println!("{}", ciphertext);
+        ciphertext = base64::encode(&ciphertext);
         let full_pub_key_fname = [&self.cfg.pem_path, "/", PUB_KEY_FNAME].concat();
         let ciphertext = encrypt(full_pub_key_fname.as_str(), &ciphertext)?;
         Ok(ciphertext)
@@ -48,6 +48,9 @@ impl RecordCommands {
         }
 
         let plaintext = decrypt(full_priv_key_fname.as_str(), &ciphertext, &self.password)?;
+        let plaintext = base64::decode(&plaintext).unwrap();
+        let plaintext = String::from_utf8(plaintext).unwrap();
+
         println!("{}", plaintext);
         let parts = plaintext.split(" ").collect::<Vec<&str>>();
 

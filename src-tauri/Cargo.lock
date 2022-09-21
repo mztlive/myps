@@ -1518,6 +1518,7 @@ name = "myps2"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "base64",
  "lazy_static",
  "openssl",
  "rand 0.8.5",
